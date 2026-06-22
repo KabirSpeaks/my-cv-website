@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamal Sau — Academic, Researcher, AI Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F3EFE3;
+  --card:#FBF8F1;
+  --ink:#161513;
+  --orange:#E84E1B;
+  --olive:#C7D92C;
+  --lavender:#B9A6DA;
+  --line: rgba(22,21,19,0.14);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Space Grotesk', sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:'Archivo', sans-serif;
+  margin:0;
+  letter-spacing:-0.01em;
+}
+a{color:inherit;text-decoration:none;}
+.mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em;}
+
+/* ---------- TOP BAR ---------- */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px clamp(16px,4vw,48px);
+  background:var(--cream);
+  border-bottom:1px solid var(--line);
+}
+.topbar .brand{font-weight:800; font-size:1.05rem; text-transform:uppercase; letter-spacing:0.02em;}
+.topbar .brand span{color:var(--orange);}
+.topbar nav{display:flex; gap:22px; font-size:0.85rem; text-transform:uppercase;}
+.topbar nav a{opacity:0.7; transition:opacity .2s;}
+.topbar nav a:hover{opacity:1;}
+.topbar .pill{
+  border:1px solid var(--ink); padding:8px 16px; border-radius:999px;
+  font-size:0.8rem; text-transform:uppercase; font-weight:600;
+}
+@media (max-width:720px){ .topbar nav{display:none;} }
+
+/* ---------- HERO ---------- */
+.hero{
+  padding:clamp(40px,8vw,90px) clamp(16px,4vw,48px) clamp(30px,6vw,60px);
+  display:grid; grid-template-columns: 1.4fr 1fr; gap:24px;
+  align-items:stretch;
+}
+.hero-main{
+  background:var(--ink); color:var(--cream);
+  border-radius:22px; padding:clamp(28px,5vw,52px);
+  display:flex; flex-direction:column; justify-content:space-between;
+  position:relative; overflow:hidden;
+  min-height:340px;
+}
+.hero-main::after{
+  content:""; position:absolute; right:-60px; bottom:-60px;
+  width:220px; height:220px; border-radius:50%;
+  background:var(--orange); opacity:0.9;
+}
+.hero-tag{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--olive); color:var(--ink);
+  font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:500;
+  padding:6px 12px; border-radius:999px; text-transform:uppercase;
+  width:fit-content;
+}
+.hero-main h1{
+  font-size:clamp(2.4rem, 6vw, 4.4rem);
+  line-height:0.98;
+  margin-top:24px;
+  font-weight:800;
+  position:relative; z-index:2;
+}
+.hero-main h1 em{font-style:normal; color:var(--olive);}
+.hero-sub{
+  position:relative; z-index:2;
+  margin-top:18px; font-size:1.05rem; max-width:520px; opacity:0.85;
+}
+.hero-side{
+  display:flex; flex-direction:column; gap:16px;
+}
+.side-card{
+  border-radius:22px; padding:22px 24px; flex:1;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.side-card.lav{background:var(--lavender);}
+.side-card.org{background:var(--orange); color:var(--cream);}
+.side-card .label{font-size:0.7rem; text-transform:uppercase; font-family:'IBM Plex Mono',monospace; opacity:0.75;}
+.side-card .big{font-size:2.1rem; font-weight:800; font-family:'Archivo',sans-serif; margin-top:8px;}
+.side-card .small{font-size:0.85rem; margin-top:6px; line-height:1.3;}
+
+/* ---------- SECTION LABEL ---------- */
+.section-label{
+  display:flex; align-items:baseline; gap:12px;
+  padding:30px clamp(16px,4vw,48px) 10px;
+}
+.section-label .num{font-family:'IBM Plex Mono',monospace; color:var(--orange); font-weight:600;}
+.section-label h2{font-size:clamp(1.4rem,2.5vw,1.9rem); text-transform:uppercase;}
+.section-label .rule{flex:1; height:1px; background:var(--line); margin-left:8px;}
+
+/* ---------- DECK GRID ---------- */
+.deck{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:14px;
+  padding:10px clamp(16px,4vw,48px) 60px;
+}
+.card{
+  border-radius:18px;
+  padding:22px;
+  cursor:pointer;
+  border:1px solid var(--line);
+  display:flex; flex-direction:column; justify-content:space-between;
+  min-height:190px;
+  transition:transform .18s ease, box-shadow .18s ease;
+  position:relative;
+}
+.card:hover{transform:translateY(-4px); box-shadow:0 10px 24px rgba(22,21,19,0.12);}
+.card:focus-visible{outline:3px solid var(--ink); outline-offset:2px;}
+.card .kicker{
+  font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase;
+  opacity:0.65;
+}
+.card h3{font-size:1.3rem; margin-top:10px; line-height:1.1;}
+.card .meta{font-size:0.82rem; margin-top:10px; opacity:0.75; line-height:1.4;}
+.card .arrow{
+  align-self:flex-end; width:34px; height:34px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid currentColor; opacity:0.6; font-size:1.1rem;
+  margin-top:14px;
+}
+
+/* card color variants */
+.c-cream{background:var(--card);}
+.c-ink{background:var(--ink); color:var(--cream);}
+.c-orange{background:var(--orange); color:var(--cream);}
+.c-olive{background:var(--olive); color:var(--ink);}
+.c-lav{background:var(--lavender); color:var(--ink);}
+
+/* span sizes */
+.span2{grid-column:span 2;}
+.span1{grid-column:span 1;}
+
+@media (max-width:980px){
+  .deck{grid-template-columns:repeat(2,1fr);}
+  .span2{grid-column:span 2;}
+  .hero{grid-template-columns:1fr;}
+}
+@media (max-width:560px){
+  .deck{grid-template-columns:1fr;}
+  .span2{grid-column:span 1;}
+}
+
+/* ---------- OVERLAY / DETAIL PANEL ---------- */
+.overlay{
+  position:fixed; inset:0; background:rgba(22,21,19,0.55);
+  display:flex; align-items:flex-end; justify-content:center;
+  z-index:100; opacity:0; visibility:hidden; transition:opacity .25s ease;
+  padding:0;
+}
+.overlay.active{opacity:1; visibility:visible;}
+.panel{
+  background:var(--cream);
+  width:100%; max-width:980px;
+  max-height:92vh; overflow-y:auto;
+  border-radius:24px 24px 0 0;
+  padding:clamp(24px,4vw,48px);
+  transform:translateY(40px);
+  transition:transform .3s ease;
+  position:relative;
+}
+.overlay.active .panel{transform:translateY(0);}
+@media (min-width:760px){
+  .overlay{align-items:center;}
+  .panel{border-radius:24px; max-height:85vh;}
+}
+.panel-close{
+  position:sticky; top:0; float:right;
+  background:var(--ink); color:var(--cream);
+  width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.2rem; cursor:pointer; border:none;
+  z-index:5;
+}
+.panel-head{
+  display:flex; justify-content:space-between; align-items:flex-start;
+  margin-bottom:22px; gap:16px;
+}
+.panel-head .pk{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; opacity:0.6;}
+.panel-head h2{font-size:clamp(1.6rem,4vw,2.4rem); margin-top:8px; line-height:1.05;}
+
+.entry{
+  border-top:1px solid var(--line);
+  padding:18px 0;
+}
+.entry:first-of-type{border-top:none;}
+.entry-head{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+.entry-head h4{font-size:1.05rem;}
+.entry-head .when{
+  font-family:'IBM Plex Mono',monospace; font-size:0.78rem;
+  background:var(--ink); color:var(--cream); padding:3px 10px; border-radius:999px;
+  white-space:nowrap; height:fit-content;
+}
+.entry .org{font-size:0.88rem; opacity:0.7; font-style:italic; margin-top:2px;}
+.entry ul{margin:12px 0 0; padding-left:18px;}
+.entry li{margin-bottom:6px; font-size:0.92rem; line-height:1.5;}
+.entry p{font-size:0.92rem; line-height:1.6; margin:8px 0 0;}
+.tagrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+.tag{
+  background:var(--card); border:1px solid var(--line);
+  font-family:'IBM Plex Mono',monospace; font-size:0.72rem;
+  padding:5px 11px; border-radius:999px;
+}
+.pub-item{border-top:1px solid var(--line); padding:14px 0; font-size:0.92rem; line-height:1.55;}
+.pub-item:first-of-type{border-top:none;}
+.pub-item a{color:var(--orange); text-decoration:underline;}
+.badge-scopus{
+  display:inline-block; margin-top:6px; font-family:'IBM Plex Mono',monospace;
+  font-size:0.7rem; background:var(--olive); padding:2px 8px; border-radius:6px;
+}
+.skill-block{margin-bottom:20px;}
+.skill-block h4{font-size:0.95rem; text-transform:uppercase; font-family:'IBM Plex Mono',monospace; color:var(--orange); margin-bottom:8px;}
+.skill-block .tagrow{margin-top:0;}
+
+/* footer */
+footer{
+  padding:50px clamp(16px,4vw,48px) 40px;
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;
+  border-top:1px solid var(--line);
+}
+footer .f-left h3{font-size:1.6rem;}
+footer .f-left p{margin-top:6px; opacity:0.75; font-size:0.9rem; max-width:380px;}
+footer .f-links{display:flex; flex-direction:column; gap:8px; font-size:0.9rem;}
+footer .f-links a{opacity:0.8; transition:opacity .2s;}
+footer .f-links a:hover{opacity:1; text-decoration:underline;}
+.copyline{
+  text-align:center; padding:14px; font-size:0.75rem; opacity:0.55;
+  font-family:'IBM Plex Mono',monospace;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">TAMAL <span>SAU</span></div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#research">Research</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="pill" href="mailto:dynamictamal@gmail.com">Say Hello</a>
+</div>
+
+<section class="hero" id="about">
+  <div class="hero-main">
+    <span class="hero-tag">● Assistant Professor of English</span>
+    <h1>Gods in <em>jeans</em>,<br>texts in <em>code</em>.</h1>
+    <p class="hero-sub">Researcher and educator bridging classical literature with AI, NLP, and language technology — gold medallist, UGC NET scholar, and four years deep in engineering-college classrooms.</p>
+  </div>
+  <div class="hero-side">
+    <div class="side-card lav">
+      <span class="label">Based in</span>
+      <div class="small mono" style="margin-top:auto; font-size:1.1rem; font-weight:600;">Hyderabad, India</div>
+    </div>
+    <div class="side-card org">
+      <span class="label">Publications</span>
+      <div class="big">7+</div>
+      <div class="small">Peer-reviewed journals &amp; conferences, incl. 1 Scopus-indexed</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-label">
+  <span class="num">01</span>
+  <h2>The Snapshot</h2>
+  <div class="rule"></div>
+</div>
+<div class="deck">
+  <div class="card c-cream span2" tabindex="0" data-panel="summary">
+    <div><span class="kicker">Profile</span>
+      <h3>Who I am, in short</h3>
+      <p class="meta">Academic, researcher, and AI-fluent educator — one paragraph, no jargon.</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+  <div class="card c-ink" tabindex="0" data-panel="education">
+    <div><span class="kicker">Education</span>
+      <h3>Gold Medal, M.A. English</h3>
+      <p class="meta">Kazi Nazrul University, top scorer · UGC NET 2019</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+  <div class="card c-orange" tabindex="0" data-panel="patent">
+    <div><span class="kicker">Patent</span>
+      <h3>1 Filed Patent</h3>
+      <p class="meta">Tech-infused language learning · Co-applicant, 2024</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+</div>
+
+<div class="section-label" id="experience">
+  <span class="num">02</span>
+  <h2>Experience</h2>
+  <div class="rule"></div>
+</div>
+<div class="deck">
+  <div class="card c-cream span2" tabindex="0" data-panel="vce">
+    <div><span class="kicker">2022 — Present</span>
+      <h3>Vardhaman College of Engineering</h3>
+      <p class="meta">Assistant Professor · Associate Dean IQAC · Course Lead</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+  <div class="card c-olive" tabindex="0" data-panel="aec">
+    <div><span class="kicker">2021 — 2022</span>
+      <h3>Asansol Engineering College</h3>
+      <p class="meta">Assistant Professor of English</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+  <div class="card c-lav" tabindex="0" data-panel="airlhf">
+    <div><span class="kicker">Outlier.ai · Soulhq.ai · Appen</span>
+      <h3>AI Training &amp; RLHF</h3>
+      <p class="meta">Model fine-tuning, response ranking, data annotation</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+</div>
+
+<div class="section-label" id="research">
+  <span class="num">03</span>
+  <h2>Research &amp; Recognition</h2>
+  <div class="rule"></div>
+</div>
+<div class="deck">
+  <div class="card c-ink span2" tabindex="0" data-panel="publications">
+    <div><span class="kicker">7 Works</span>
+      <h3>Publications &amp; Citations</h3>
+      <p class="meta">Literary theory, AI ethics, Foucauldian analysis, big data &amp; English language evolution</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+  <div class="card c-cream" tabindex="0" data-panel="certifications">
+    <div><span class="kicker">Verified</span>
+      <h3>Certifications</h3>
+      <p class="meta">CEFR C1–C2 · British Council · Cambridge · EF SET</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+  <div class="card c-orange" tabindex="0" data-panel="fdp">
+    <div><span class="kicker">2022 — 2024</span>
+      <h3>Faculty Development</h3>
+      <p class="meta">NEP 2020, Indian Knowledge Systems, modern pedagogy</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+</div>
+
+<div class="section-label" id="skills">
+  <span class="num">04</span>
+  <h2>Skills &amp; Tools</h2>
+  <div class="rule"></div>
+</div>
+<div class="deck">
+  <div class="card c-lav span2" tabindex="0" data-panel="skills">
+    <div><span class="kicker">Full Toolkit</span>
+      <h3>Teaching, Research, AI &amp; Counseling</h3>
+      <p class="meta">From Bloom's Taxonomy to RLHF to student counseling calls</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+  <div class="card c-olive" tabindex="0" data-panel="languages">
+    <div><span class="kicker">Proficiency</span>
+      <h3>Languages</h3>
+      <p class="meta">English (C2) · Hindi · Bengali</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+  <div class="card c-cream" tabindex="0" data-panel="extra">
+    <div><span class="kicker">Beyond the CV</span>
+      <h3>Also Qualified For</h3>
+      <p class="meta">NABARD &amp; SEBI Grade A prelims, photography, journalism</p>
+    </div>
+    <div class="arrow">↗</div>
+  </div>
+</div>
+
+<footer id="contact">
+  <div class="f-left">
+    <h3>Let's talk.</h3>
+    <p>Open to academic roles, research collaborations, AI training engagements, and content or counseling work. Based in Hyderabad, India — happy to work remote.</p>
+  </div>
+  <div class="f-links">
+    <a href="mailto:dynamictamal@gmail.com">dynamictamal@gmail.com</a>
+    <a href="tel:8343820271">+91 83438 20271</a>
+    <a href="https://www.researchgate.net/profile/Tamal-Sau/research" target="_blank">ResearchGate ↗</a>
+    <a href="https://independent.academia.edu/Tamalsau" target="_blank">Academia.edu ↗</a>
+    <a href="https://orcid.org/0009-0009-9455-3303" target="_blank">ORCID: 0009-0009-9455-3303</a>
+  </div>
+</footer>
+<div class="copyline">© 2026 TAMAL SAU — BUILT WITH CARE, NOT TEMPLATES.</div>
+
+<div class="overlay" id="overlay">
+  <div class="panel" id="panel"></div>
+</div>
+
+<script>
+const data = {
+  summary: {
+    kicker: "Profile",
+    title: "Who I am, in short",
+    body: `<p>Assistant Professor of English with years of teaching experience in engineering colleges and private coaching centers, combining a strong academic foundation in literature and linguistics with practical skills in curriculum design and academic administration. UGC NET-qualified scholar and gold medallist (M.A. English Literature), with a consistent record of peer-reviewed publications and conference presentations.</p>
+    <p>Experienced in question-paper development aligned to learning outcomes, institutional content writing, student mentoring, and competitive-exam coaching. Also skilled in outbound and inbound calling, student counseling calls, and mentoring calls, with a strong ability to build rapport and guide students through academic and career decisions. Adaptable across academic, professional, and counseling contexts, with strong research, communication, and analytical skills.</p>`
+  },
+  education: {
+    kicker: "Education",
+    title: "Academic Foundation",
+    body: `
+    <div class="entry"><div class="entry-head"><h4>Post Graduate Certificate, Digital Marketing &amp; Growth</h4><span class="when">2024</span></div><div class="org">IIM Visakhapatnam</div></div>
+    <div class="entry"><div class="entry-head"><h4>B.Ed in English Pedagogy</h4><span class="when">2022</span></div><div class="org">University of Burdwan</div></div>
+    <div class="entry"><div class="entry-head"><h4>Master of Arts, English Literature</h4><span class="when">2019</span></div><div class="org">Kazi Nazrul University — Top Scorer (7.0 CGPA), Gold Medal &amp; Cash Prize</div></div>
+    <div class="entry"><div class="entry-head"><h4>UGC NET — English Literature</h4><span class="when">2019</span></div></div>
+    <div class="entry"><div class="entry-head"><h4>Bachelor of Arts, English Literature</h4><span class="when">2017</span></div><div class="org">University of Burdwan</div></div>
+    <div class="entry"><div class="entry-head"><h4>I.S.C. (Humanities)</h4><span class="when">2014</span></div><div class="org">Assembly of God Church, West Bengal</div></div>
+    <div class="entry"><div class="entry-head"><h4>I.C.S.E. (Science)</h4><span class="when">2012</span></div><div class="org">St. Vincent's School, Asansol, West Bengal</div></div>
+    `
+  },
+  patent: {
+    kicker: "Patent",
+    title: "Enhancing Language Learning Through Technology-Infused Instruction",
+    body: `<div class="entry"><p>Indian Patent Application No. 202441018918 — Published 29/03/2024. Filed under The Patents Act, 1970 (India). Co-applicant: Tamal Sau.</p>
+    <p><strong>Brief Description:</strong> A technology-infused approach to enhance language learning, improving comprehension and engagement through modern instructional tools.</p></div>`
+  },
+  vce: {
+    kicker: "April 2022 — Present",
+    title: "Vardhaman College of Engineering, Hyderabad",
+    body: `<div class="entry">
+    <ul>
+      <li>Adapted teaching strategies to accommodate diverse student learning styles and skill levels</li>
+      <li>Served as Associate Dean, IQAC (Internal Quality Assurance Cell), contributing to institutional quality benchmarking</li>
+      <li>Functioned as Course Lead: designed question papers, managed course attainment processes, mapped POs and COs</li>
+      <li>Trained students under the Career Development Cell (CDC) in soft skills and verbal ability for GATE, TCS NQT, TOEFL, IELTS, Cambridge Linguaskill, interview &amp; group discussion prep</li>
+      <li>Designed lesson plans and syllabi; managed broader academic administration</li>
+      <li>Organized Literature Fests and Faculty Development Programs (FDPs)</li>
+      <li>Contributed to NBA, NAAC, Green Rankings, academic audits, and fact-finding committees</li>
+      <li>Authored institutional brochures and website content; led content writing and design projects</li>
+      <li>Actively engaged in research, producing peer-reviewed publications and conference papers</li>
+      <li>Reviewed student work and raised average exam scores through goal-setting and improved study habits</li>
+    </ul>
+    </div>`
+  },
+  aec: {
+    kicker: "November 2021 — March 2022",
+    title: "Asansol Engineering College, West Bengal",
+    body: `<div class="entry"><ul>
+      <li>Reviewed student work and provided constructive feedback for improvement</li>
+      <li>Simplified complex literary and linguistic concepts for student comprehension</li>
+      <li>Encouraged interest-based reading to boost engagement and reading frequency</li>
+    </ul></div>`
+  },
+  airlhf: {
+    kicker: "AI & RLHF Experience",
+    title: "Training Models, One Response at a Time",
+    body: `<div class="entry"><h4>Outlier.ai &amp; Soulhq.ai</h4><p>RLHF training, AI model fine-tuning, response evaluation and ranking.</p></div>
+    <div class="entry"><h4>Appen</h4><p>AI training data annotation and quality evaluation.</p></div>`
+  },
+  publications: {
+    kicker: "Research Output",
+    title: "Publications & Academic Impact",
+    body: `
+    <div class="pub-item">Pal, Rukmita, and Tamal Sau. "Memory, Temporality, and Healing: Literary and Theoretical Dimensions in Toshikazu Kawaguchi's <i>Before the Coffee Gets Cold</i> Trilogy." <i>The Academic: International Journal of Multidisciplinary Research</i>, vol. 3, no. 7, July 2025, ISSN 2583-973X.</div>
+    <div class="pub-item">Pal, Rukmita, and Tamal Sau. "Gods in Jeans and Sneakers: The Modern Adaptation of Greek and Roman Mythology in Rick Riordan's <i>Percy Jackson</i> Series." <i>IJFMR</i>, vol. 8, no. 2, Mar–Apr 2026. <a href="https://doi.org/10.36948/ijfmr.2026.v08i02.76456" target="_blank">DOI ↗</a></div>
+    <div class="pub-item">Sau, Tamal, and Rukmita Pal. "Biometric Surveillance and Power Dynamics in the Indian Office Context: A Panoptic and Orwellian Examination." <i>IJMFR</i>, vol. 7, no. 3, May–June 2025. <a href="https://doi.org/10.36948/ijmfr.2025.v07i03.48871" target="_blank">DOI ↗</a></div>
+    <div class="pub-item">Sau, Tamal. "The Self-Fulfilling Prophecy of Digital Dystopia: A Psychoanalytic Perspective on Artificial Intelligence's Algorithmic Thought." <i>IJSDR</i>, vol. 10, no. 6, June 2025, ISSN 2455-2631.</div>
+    <div class="pub-item">Sau, Tamal, et al. "Decoding Imagist Poetry Through Artificial Intelligence: A Deep Learning Framework for Literary Analysis and Translation Studies." <i>The Criterion</i>, vol. 16, no. 2, Apr 2025, pp. 1154–74. <a href="https://doi.org/10.5281/zenodo.15320927" target="_blank">DOI ↗</a></div>
+    <div class="pub-item">Elamadurthi, R. K., A. Chakraborty, T. Sau, S. Pukkalla, and G. Suryanarayana. "Mapping the Evolution of English Language: Insights from Big Data Analysis." <i>2024 IEEE ICCCMLA</i>, Hamburg, Germany, pp. 564–568. <a href="https://doi.org/10.1109/ICCCMLA63077.2024.10871662" target="_blank">DOI ↗</a><span class="badge-scopus">Scopus Indexed</span></div>
+    <div class="pub-item">Sau, Tamal, et al. "From Tradition to Modernity: The Evolution of Female Representation in the Works of Mrinal Sen, Satyajit Ray, and Kiran Rao." <i>LangLit</i>, vol. 10, no. 4, May 2024, pp. 58–64.</div>
+    <div class="pub-item">Sau, Tamal. "The Modalities of Power and the Use of Population by the State: A Foucauldian Analysis of George Orwell's <i>1984</i>." <i>Anveshak: A Research Journal</i>, vol. 52, 2022, pp. 138–142.</div>
+    <div class="pub-item" style="margin-top:6px;"><strong>Academic Impact:</strong> Cited in Benaziza, L. M. (2024). <i>Big Brother's Supreme Dominance and Its Impact on Truth and Freedom in George Orwell's Nineteen Eighty-Four</i> (Master's thesis, University of Algiers).</div>
+    `
+  },
+  certifications: {
+    kicker: "Verified Proficiency",
+    title: "Certifications",
+    body: `<div class="entry"><ul>
+      <li>CEFR C1+ — British Council English Assessment (2025)</li>
+      <li>CEFR C1+ — Cambridge Linguaskill Business English (2025)</li>
+      <li>CEFR C2 — EF SET English Language Proficiency (2025)</li>
+      <li>JNTUH Ratified (2023)</li>
+      <li>Literature and Culture: Texts in Context — Bidhan Chandra College, Asansol (2020)</li>
+      <li>Career Edge — Knockdown the Lockdown, Tata Consultancy Services (2020)</li>
+      <li>UGC/NTA NET Qualified — English Literature (2019)</li>
+      <li>Contemplative Photography and General Semantics — NIT Durgapur with GIAN (2017)</li>
+    </ul></div>`
+  },
+  fdp: {
+    kicker: "Faculty Development",
+    title: "Programs Attended & Organized",
+    body: `<div class="entry"><ul>
+      <li>Enriching Educators with Tools and Strategies to Enhance Teaching, Learning and Research — Organizing Committee Member (2024)</li>
+      <li>Advanced Approaches and Innovative Intricacies for Modern Language Classrooms (2023)</li>
+      <li>Indian Knowledge Systems: Science and Technology in Ancient India (IKS-ST2023) (2023)</li>
+      <li>Effective Implementation of NEP 2020 in Engineering Education (2022)</li>
+    </ul></div>`
+  },
+  skills: {
+    kicker: "Full Toolkit",
+    title: "Skills Across Teaching, Research, AI & Outreach",
+    body: `
+    <div class="skill-block"><h4>Teaching &amp; Academic</h4>
+      <div class="tagrow">
+        <span class="tag">English Language Instruction</span><span class="tag">Curriculum Design</span><span class="tag">Lesson Planning</span>
+        <span class="tag">Question Paper Design (CO/Bloom's)</span><span class="tag">Academic Writing</span><span class="tag">Student Mentoring</span>
+        <span class="tag">GATE / TCS NQT / TOEFL / IELTS Coaching</span>
+      </div>
+    </div>
+    <div class="skill-block"><h4>Research &amp; Writing</h4>
+      <div class="tagrow">
+        <span class="tag">Literary Criticism</span><span class="tag">Psychoanalytic Analysis</span><span class="tag">Foucauldian Analysis</span>
+        <span class="tag">Technical Writing</span><span class="tag">Content Writing &amp; Curation</span><span class="tag">LaTeX</span><span class="tag">Editing</span>
+      </div>
+    </div>
+    <div class="skill-block"><h4>AI &amp; Data</h4>
+      <div class="tagrow">
+        <span class="tag">AI Model Fine-Tuning</span><span class="tag">RLHF</span><span class="tag">Sentiment Analysis</span>
+        <span class="tag">Big Data Analysis</span><span class="tag">NLP-based Literary Analysis</span><span class="tag">AI-driven Translation Studies</span>
+      </div>
+    </div>
+    <div class="skill-block"><h4>Calling &amp; Counseling</h4>
+      <div class="tagrow">
+        <span class="tag">Outbound / Inbound Calling</span><span class="tag">Student Counseling Calls</span>
+        <span class="tag">Mentoring Calls</span><span class="tag">Career Guidance</span><span class="tag">Rapport Building</span>
+      </div>
+    </div>
+    <div class="skill-block"><h4>Tools &amp; Software</h4>
+      <div class="tagrow">
+        <span class="tag">MS Office Suite</span><span class="tag">Google Suite</span><span class="tag">Canva</span><span class="tag">ChatGPT</span><span class="tag">Gemini</span>
+        <span class="tag">Claude</span><span class="tag">NotebookLM</span><span class="tag">Obsidian</span><span class="tag">Paperpal</span><span class="tag">Jenni</span>
+        <span class="tag">Turnitin</span><span class="tag">Rayyan</span><span class="tag">OBS</span><span class="tag">VEED</span><span class="tag">Visme</span><span class="tag">XMind</span><span class="tag">VN Editor</span><span class="tag">Appen</span>
+      </div>
+    </div>
+    `
+  },
+  languages: {
+    kicker: "Proficiency",
+    title: "Languages",
+    body: `<div class="entry"><ul>
+      <li>English — CEFR C2 (EF SET); C1+ (British Council &amp; Cambridge Linguaskill)</li>
+      <li>Hindi — Professional Proficiency</li>
+      <li>Bengali — Native, with deep cultural and literary engagement</li>
+      <li>Audio Transcription across English &amp; Hindi content</li>
+    </ul></div>`
+  },
+  extra: {
+    kicker: "Beyond the CV",
+    title: "Also Worth Knowing",
+    body: `<div class="entry"><ul>
+      <li>Subjects taught: Indian Constitution, Modern Indian History, Geography, Sociology</li>
+      <li>Qualified NABARD Grade A Prelims (twice) and SEBI Grade A Prelims (once)</li>
+      <li>Strong interest in journalism, research, photography, and video editing</li>
+      <li>Founder, Bongified — a print-on-demand Bengali culture apparel store</li>
+    </ul></div>`
+  }
+};
+
+const overlay = document.getElementById('overlay');
+const panel = document.getElementById('panel');
+
+function openPanel(key){
+  const d = data[key];
+  if(!d) return;
+  panel.innerHTML = `
+    <button class="panel-close" aria-label="Close" onclick="closePanel()">✕</button>
+    <div class="panel-head">
+      <div>
+        <div class="pk">${d.kicker}</div>
+        <h2>${d.title}</h2>
+      </div>
+    </div>
+    ${d.body}
+  `;
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closePanel(){
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closePanel(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closePanel(); });
+
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('click', ()=> openPanel(card.dataset.panel));
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openPanel(card.dataset.panel); }
+  });
+});
+</script>
+</body>
+</html>
